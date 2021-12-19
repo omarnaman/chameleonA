@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">Chameleon A</string>
     <string name="message">Watch face tapped</string>
-    <string name="my_analog_name">My Analog</string>
+    <string name="my_analog_name">Chameleon A</string>
+    <string name="digital_config_name">Config</string>
+    <string name="title_activity_hours_hand_color_selection">ColorSelectionActivity</string>
+    <string name="analog_config_file">com.aqel.chameleona.ANALOG_CONFIG_FILE</string>
+    <string name="config_hours_color">com.aqel.chameleona.hours_color</string>
+
 </resources>
