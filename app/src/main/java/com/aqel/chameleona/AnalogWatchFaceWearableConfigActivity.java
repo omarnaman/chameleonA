@@ -6,21 +6,21 @@ import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.wear.widget.WearableRecyclerView;
 
-import com.aqel.chameleona.adapters.ColorPickerAdapter;
-import com.aqel.chameleona.databinding.ActivityColorSelectionBinding;
+import com.aqel.chameleona.adapters.ItemSelectionAdapter;
+import com.aqel.chameleona.databinding.ActivityItemSelectionBinding;
 
 public class AnalogWatchFaceWearableConfigActivity extends Activity {
     private WearableRecyclerView mRecyclerView;
-    private ActivityColorSelectionBinding binding;
-    private ColorPickerAdapter mColorPickerAdapter;
+    private ActivityItemSelectionBinding binding;
+    private ItemSelectionAdapter itemSelectionAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityColorSelectionBinding.inflate(getLayoutInflater());
+        binding = ActivityItemSelectionBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        mColorPickerAdapter = new ColorPickerAdapter("com.aqel.chameleona.hours_color");
+        itemSelectionAdapter = new ItemSelectionAdapter();
         mRecyclerView = binding.wearableRecyclerView;
         mRecyclerView.setEdgeItemsCenteringEnabled(true);
 
@@ -30,6 +30,6 @@ public class AnalogWatchFaceWearableConfigActivity extends Activity {
         // the RecyclerView.
         mRecyclerView.setHasFixedSize(true);
 
-        mRecyclerView.setAdapter(mColorPickerAdapter);
+        mRecyclerView.setAdapter(itemSelectionAdapter);
     }
 }

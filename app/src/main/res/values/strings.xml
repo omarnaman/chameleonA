@@ -6,5 +6,9 @@
     <string name="title_activity_hours_hand_color_selection">ColorSelectionActivity</string>
     <string name="analog_config_file">com.aqel.chameleona.ANALOG_CONFIG_FILE</string>
     <string name="config_hours_color">com.aqel.chameleona.hours_color</string>
+    <string name="config_minutes_color">com.aqel.chameleona.minutes_color</string>
+    <string name="config_seconds_color">com.aqel.chameleona.seconds_color</string>
+    <string name="config_background_color">com.aqel.chameleona.background_color</string>
+    <string name="config_ticks_color">com.aqel.chameleona.ticks_color</string>
 
 </resources>
