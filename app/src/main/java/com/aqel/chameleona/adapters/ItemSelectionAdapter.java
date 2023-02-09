@@ -57,14 +57,16 @@ public class ItemSelectionAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     private class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private CircledImageView mItemCircleView;
-        private TextView mItemNameView;
+        private final CircledImageView mItemCircleView;
+        private final TextView mItemNameView;
+        private final Context mContext;
 
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
             mItemCircleView = itemView.findViewById(R.id.clock_item);
             mItemNameView = itemView.findViewById(R.id.clock_item_name);
+            mContext = itemView.getContext();
         }
 
         @Override
@@ -79,6 +81,12 @@ public class ItemSelectionAdapter extends RecyclerView.Adapter<RecyclerView.View
 
         public void setInfo(ClockItemInfo clockItemInfo) {
             mItemNameView.setText(clockItemInfo.getItemName());
+            SharedPreferences mSharedPref = mContext.getSharedPreferences(
+                    mContext.getString(R.string.analog_config_file),
+                    Context.MODE_PRIVATE);
+            String preferenceString = mContext.getString(clockItemInfo.getPreferenceStringId());
+            int color = mSharedPref.getInt(preferenceString, 0x2a2a2a);
+            mItemCircleView.setCircleColor(color);
         }
     }
 }
