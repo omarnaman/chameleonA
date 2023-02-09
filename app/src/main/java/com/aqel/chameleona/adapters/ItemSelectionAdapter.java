@@ -1,7 +1,9 @@
 package com.aqel.chameleona.adapters;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.wearable.view.CircledImageView;
 import android.util.Log;
 import android.view.LayoutInflater;
