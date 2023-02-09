@@ -44,13 +44,16 @@ public class ColorInfo {
         colorsList.add(new ColorInfo(Color.parseColor("#36DFEB"), "Cyan"));
         colorsList.add(new ColorInfo(Color.parseColor("#238A91"), "Dark Cyan"));
         colorsList.add(new ColorInfo(Color.parseColor("#54BFC7"), "Light Cyan"));
+        colorsList.add(new ColorInfo(Color.parseColor("#3BC45A"), "Green"));
+        colorsList.add(new ColorInfo(Color.parseColor("#3CF30C"), "Bright Green"));
         colorsList.add(new ColorInfo(Color.parseColor("#1473E0"), "Blue"));
+        colorsList.add(new ColorInfo(Color.parseColor("#E308F7"), "Magenta"));
+        colorsList.add(new ColorInfo(Color.parseColor("#9D22DD"), "Purple"));
         colorsList.add(new ColorInfo(Color.parseColor("#083A73"), "Navy"));
         colorsList.add(new ColorInfo(Color.parseColor("#505D63"), "Grey"));
         colorsList.add(new ColorInfo(Color.parseColor("#687175"), "Light Grey"));
         colorsList.add(new ColorInfo(Color.parseColor("#63828F"), "Cyan Grey"));
         colorsList.add(new ColorInfo(Color.parseColor("#D4D6D6"), "White"));
-        colorsList.add(new ColorInfo(Color.parseColor("#000000"), "Black"));
 
         return colorsList;
     }
