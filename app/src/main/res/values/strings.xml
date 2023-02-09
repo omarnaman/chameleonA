@@ -10,5 +10,6 @@
     <string name="config_seconds_color">com.aqel.chameleona.seconds_color</string>
     <string name="config_background_color">com.aqel.chameleona.background_color</string>
     <string name="config_ticks_color">com.aqel.chameleona.ticks_color</string>
+    <string name="config_date_color">com.aqel.chameleona.date_color</string>
 
 </resources>

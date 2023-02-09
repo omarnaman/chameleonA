@@ -33,6 +33,7 @@ public class ItemSelectionAdapter extends RecyclerView.Adapter<RecyclerView.View
         mItems.add(new ClockItemInfo("Seconds", 0, R.string.config_seconds_color));
         mItems.add(new ClockItemInfo("Background", 0, R.string.config_background_color));
         mItems.add(new ClockItemInfo("Ticks", 0, R.string.config_ticks_color));
+        mItems.add(new ClockItemInfo("Date", 0, R.string.config_date_color));
 
     }
 

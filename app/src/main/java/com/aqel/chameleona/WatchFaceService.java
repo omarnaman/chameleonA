@@ -21,6 +21,8 @@ import android.view.SurfaceHolder;
 import android.widget.Toast;
 
 import java.lang.ref.WeakReference;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
 
@@ -88,7 +90,10 @@ public class WatchFaceService extends CanvasWatchFaceService {
         private static final int DEFAULT_MINUTE_COLOR = Color.WHITE;
         private static final int DEFAULT_SECOND_COLOR = Color.RED;
         private static final int DEFAULT_CIRCLE_COLOR = Color.WHITE;
+        private static final int DEFAULT_DATE_COLOR = Color.WHITE;
         private static final float HAND_END_CAP_RADIUS = 6f;
+
+        private static final float DATE_OFFSET = 0.5f;
 
 
         /* Handler to update the time once a second in interactive mode. */
@@ -116,12 +121,14 @@ public class WatchFaceService extends CanvasWatchFaceService {
         private int mWatchMiddleCircleColor;
         private int mWatchSubTickColor;
         private int mBackgroundColor;
+        private int mWatchDateColor;
         private Paint mHourPaint;
         private Paint mMinutePaint;
         private Paint mSecondPaint;
         private Paint mTickAndCirclePaint;
         private Paint mSubTickPaint;
         private Paint mBackgroundPaint;
+        private Paint mDatePaint;
         private TextPaint mTextPaint;
         private boolean mAmbient;
         private boolean mLowBitAmbient;
@@ -165,6 +172,9 @@ public class WatchFaceService extends CanvasWatchFaceService {
                     Color.red(mWatchMiddleCircleColor),
                     Color.green(mWatchMiddleCircleColor),
                     Color.blue(mWatchMiddleCircleColor));
+
+            String datePreferenceString = getApplicationContext().getString(R.string.config_date_color);
+            mWatchDateColor = mSharedPref.getInt(datePreferenceString, mWatchDateColor);
         }
 
         private void initializeBackground() {
@@ -180,6 +190,7 @@ public class WatchFaceService extends CanvasWatchFaceService {
             mWatchHandHighlightColor = DEFAULT_SECOND_COLOR;
             mWatchMiddleCircleColor = DEFAULT_CIRCLE_COLOR;
             mWatchHandShadowColor = Color.BLACK;
+            mWatchDateColor = DEFAULT_DATE_COLOR;
 
             mHourPaint = new Paint();
             mHourPaint.setColor(mWatchHourHandColor);
@@ -227,6 +238,13 @@ public class WatchFaceService extends CanvasWatchFaceService {
             mSubTickPaint.setAntiAlias(true);
             mTickAndCirclePaint.setStyle(Paint.Style.STROKE);
             mSubTickPaint.setShadowLayer(SHADOW_RADIUS, 0, 0, mWatchHandShadowColor);
+
+            mDatePaint = new TextPaint();
+            mDatePaint.setColor(mWatchDateColor);
+            mDatePaint.setStrokeWidth(5f);
+            mDatePaint.setAntiAlias(true);
+            mDatePaint.setTextAlign(Paint.Align.CENTER);
+            mDatePaint.setTextSize(20f);
         }
 
         @Override
@@ -387,11 +405,14 @@ public class WatchFaceService extends CanvasWatchFaceService {
 
             final float hourHandOffset = mCalendar.get(Calendar.MINUTE) / 2f;
             final float hoursRotation = (mCalendar.get(Calendar.HOUR) * 30) + hourHandOffset;
+            DateFormat dateFormat = new SimpleDateFormat("EEE, MMM d");
+            final String dateText = dateFormat.format(mCalendar.getTime());
 
             /*
              * Save the canvas state before we can begin to rotate it.
              */
             canvas.save();
+            canvas.drawText(dateText, mCenterX, mCenterY - mCenterY*DATE_OFFSET, mDatePaint);
 
             canvas.rotate(hoursRotation, mCenterX, mCenterY);
             drawHand(canvas, sHourHandLength, mHourPaint);
