@@ -54,6 +54,7 @@ public class ColorInfo {
         colorsList.add(new ColorInfo(Color.parseColor("#687175"), "Light Grey"));
         colorsList.add(new ColorInfo(Color.parseColor("#63828F"), "Cyan Grey"));
         colorsList.add(new ColorInfo(Color.parseColor("#D4D6D6"), "White"));
+        colorsList.add(new ColorInfo(Color.parseColor("#000000"), "Black"));
 
         return colorsList;
     }
