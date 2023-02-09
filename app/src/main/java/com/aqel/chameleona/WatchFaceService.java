@@ -292,6 +292,7 @@ public class WatchFaceService extends CanvasWatchFaceService {
                 mTickAndCirclePaint.setColor(mWatchMiddleCircleColor);
                 mTextPaint.setColor(mWatchMiddleCircleColor);
                 mSubTickPaint.setColor(mWatchSubTickColor);
+                mDatePaint.setColor(mWatchDateColor);
 
                 mHourPaint.setAntiAlias(true);
                 mMinutePaint.setAntiAlias(true);
