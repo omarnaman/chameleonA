@@ -451,7 +451,7 @@ public class WatchFaceService extends CanvasWatchFaceService {
             canvas.restore();
         }
 
-        private void drawMainTicks(Canvas canvas) {
+        private void drawMainTicks(Canvas canvas, long hourTickValue, long minuteTickValue, long secondTickValue) {
             float innerTickRadius = mCenterX - (mCenterX * .1f);
             float innerTextRadius = innerTickRadius - (mCenterX * .08f);
             float outerTickRadius = mCenterX;
