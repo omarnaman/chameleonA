@@ -23,6 +23,7 @@ import android.widget.Toast;
 import java.lang.ref.WeakReference;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TimeZone;
 
@@ -389,8 +390,6 @@ public class WatchFaceService extends CanvasWatchFaceService {
              * creates them on top of the photo.
              */
 
-            drawMainTicks(canvas);
-            drawSubTicks(canvas);
 
             /*
              * These calculations reflect the rotation in degrees per unit of time, e.g.,
@@ -407,6 +406,12 @@ public class WatchFaceService extends CanvasWatchFaceService {
             DateFormat dateFormat = new SimpleDateFormat("EEE, MMM d");
             final String dateText = dateFormat.format(mCalendar.getTime());
 
+            final int hourTickValue = mCalendar.get(Calendar.HOUR);
+            final long minuteTickValue = Math.round(mCalendar.get(Calendar.MINUTE) / 5.0) % 12;
+            final long secondTickValue = Math.round(mCalendar.get(Calendar.SECOND) / 5.0) % 12;
+
+            drawMainTicks(canvas, hourTickValue, minuteTickValue, secondTickValue);
+//            drawSubTicks(canvas);
             /*
              * Save the canvas state before we can begin to rotate it.
              */
@@ -450,7 +455,10 @@ public class WatchFaceService extends CanvasWatchFaceService {
             float innerTickRadius = mCenterX - (mCenterX * .1f);
             float innerTextRadius = innerTickRadius - (mCenterX * .08f);
             float outerTickRadius = mCenterX;
-
+            ArrayList<Integer> activeTicks = new ArrayList<>();
+            activeTicks.add((int) hourTickValue);
+            activeTicks.add((int) minuteTickValue);
+            activeTicks.add((int) ((hourTickValue + 1)%12));
             for (Integer tickIndex = 0; tickIndex < 12; tickIndex++) {
                 float tickRot = (float) (tickIndex * Math.PI * 2 / 12);
                 float innerX = (float) Math.sin(tickRot) * innerTickRadius;
@@ -459,11 +467,14 @@ public class WatchFaceService extends CanvasWatchFaceService {
                 float innerTextY = (float) -Math.cos(tickRot) * innerTextRadius;
                 float outerX = (float) Math.sin(tickRot) * outerTickRadius;
                 float outerY = (float) -Math.cos(tickRot) * outerTickRadius;
-                canvas.drawLine(mCenterX + innerX, mCenterY + innerY,
-                        mCenterX + outerX, mCenterY + outerY, mTickAndCirclePaint);
                 mTextPaint.setTextSize(25f);
-                canvas.drawText(tickIndex == 0 ? "12" : tickIndex.toString(), mCenterX + (innerTextX), mCenterY + (innerTextY) + (mCenterX * .032f), mTextPaint);
-//                canvas.drawText(tickIndex == 0 ? "12" : tickIndex.toString(), mCenterX + (innerTextX * 1f), mCenterY + (innerTextY * 1f), mTextPaint);
+
+                if(activeTicks.contains(tickIndex)){
+                    canvas.drawLine(mCenterX + innerX, mCenterY + innerY,
+                            mCenterX + outerX, mCenterY + outerY, mTickAndCirclePaint);
+                    canvas.drawText(tickIndex == 0 ? "12" : tickIndex.toString(), mCenterX + (innerTextX), mCenterY + (innerTextY) + (mCenterX * .032f), mTextPaint);
+                }
+                    //                canvas.drawText(tickIndex == 0 ? "12" : tickIndex.toString(), mCenterX + (innerTextX * 1f), mCenterY + (innerTextY * 1f), mTextPaint);
 
             }
         }
